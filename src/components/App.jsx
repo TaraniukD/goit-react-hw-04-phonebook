@@ -11,10 +11,11 @@ export function App() {
   const [filter, setFilter] = useState('');
 
  const handleSubmit = data => {
-   setContacts(( contacts ) => 
-   contacts.find(contact => contact.name === data.name)
-    ? alert(`${data.name} is already in contacts`)
-     :  [...contacts, data]);
+   if (contacts.find(contact => contact.name === data.name)) {
+     alert(`${data.name} is already in contacts`);
+     return;
+   }
+     setContacts(prevState =>  [...prevState, data]);
   };
 
   const changeFilter = e => {
